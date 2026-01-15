@@ -1,0 +1,18 @@
+# Device Configuration for DE10-Nano
+set_global_assignment -name FAMILY "Cyclone V"
+set_global_assignment -name DEVICE 5CSEMA4U23C6
+set_global_assignment -name TOP_LEVEL_ENTITY blink
+
+# Tell Quartus where the code is
+set_global_assignment -name SYSTEMVERILOG_FILE src/blink.sv
+
+# Pin Assignments
+set_location_assignment PIN_V11 -to clk
+set_location_assignment PIN_W15 -to led
+
+# Electrical Standards
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to clk
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to led
+
+# Force output files to the "output_files" folder
+set_global_assignment -name PROJECT_OUTPUT_DIRECTORY output_files
