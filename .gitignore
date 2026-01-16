@@ -1,0 +1,3 @@
+# .gitignore
+# Ignore compilation reports
+*/build/compilation_report.txt
