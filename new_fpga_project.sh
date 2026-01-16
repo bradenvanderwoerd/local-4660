@@ -40,8 +40,8 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 TOOLS_DIR="$SCRIPT_DIR/tools"
 
 # Check if required files exist
-if [ ! -f "$TOOLS_DIR/Makefile.shared" ]; then
-    echo -e "${RED}Error: Shared Makefile not found: $TOOLS_DIR/Makefile.shared${NC}"
+if [ ! -f "$TOOLS_DIR/Makefile" ]; then
+    echo -e "${RED}Error: Shared Makefile not found: $TOOLS_DIR/Makefile${NC}"
     exit 1
 fi
 
@@ -63,7 +63,7 @@ cat > "$PROJECT_NAME/Makefile" << EOF
 PROJECT_NAME = $PROJECT_NAME
 
 # Include shared Makefile with all the workflow logic
-include ../tools/Makefile.shared
+include ../tools/Makefile
 EOF
 
 # Generate .qsf file from template
