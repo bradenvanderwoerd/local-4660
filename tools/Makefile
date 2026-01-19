@@ -60,7 +60,7 @@ status:
 	@echo "Current IP: $(VM_IP)"
 
 # --- Development Flow ---
-sync:
+sync: update-qsf
 	@echo "🔄 Syncing code to Cloud ($(VM_IP))..."
 	ssh -o StrictHostKeyChecking=no $(VM_USER)@$(VM_IP) "mkdir -p $(VM_DIR)/output_files"
 	rsync -avz --exclude '.git' --exclude 'build' --exclude '$(OBJ_DIR)' ./ $(VM_USER)@$(VM_IP):$(VM_DIR)
@@ -89,6 +89,25 @@ program:
 ssh:
 	ssh $(VM_USER)@$(VM_IP)
 
+# --- Auto-Update Project File ---
+update-qsf:
+	@echo "⚙️  Refreshing .qsf file list..."
+	@# 1. Create a backup just in case
+	@cp $(PROJECT_NAME).qsf $(PROJECT_NAME).qsf.bak
+	
+	@# 2. Filter out ALL existing references to files in src/
+	@#    We use a temporary file because editing in-place is tricky across Mac/Linux
+	@grep -v "src/.*\.sv" $(PROJECT_NAME).qsf > $(PROJECT_NAME).qsf.tmp
+	
+	@# 3. Add all current files from src/ to the temp file
+	@for f in src/*.sv; do \
+		echo "set_global_assignment -name SYSTEMVERILOG_FILE $$f" >> $(PROJECT_NAME).qsf.tmp; \
+	done
+	
+	@# 4. Overwrite the original file
+	@mv $(PROJECT_NAME).qsf.tmp $(PROJECT_NAME).qsf
+	@echo "✅ QSF updated: synced with src/ directory."
+
 # --- Local Simulation (Verilator + Surfer) ---
 sim:
 	@echo "🔬 Running local simulation with Verilator..."
@@ -108,12 +127,17 @@ sim:
 	verilator --binary --timing --trace -j 0 --top-module $(TB_MODULE) $(SRCS) $(TBS)
 	# 2. Run the simulation
 	./$(OBJ_DIR)/V$(TB_MODULE)
-	# 3. Open Surfer (if available)
-	@if command -v surfer >/dev/null 2>&1; then \
-		echo "📊 Opening Surfer..."; \
-		surfer dump.vcd; \
+
+surfer:
+	@echo "📊 Opening Surfer..."
+	@if [ -f dump.vcd ]; then \
+		if command -v surfer >/dev/null 2>&1; then \
+			surfer dump.vcd; \
+		else \
+			echo "❌ Error: 'surfer' command not found. Please install Surfer to view waveforms."; \
+		fi \
 	else \
-		echo "💡 Tip: Install 'surfer' to view waveforms, or use: surfer dump.vcd"; \
+		echo "❌ Error: dump.vcd not found. Please run 'make sim' first to generate the waveform file."; \
 	fi
 
 clean_sim:
