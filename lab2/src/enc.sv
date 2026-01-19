@@ -1,8 +1,8 @@
 // enc.sv
-// Description:
+// Description: Rotary enocder state machine
 // Braden Vanderwoerd, 1/18/2026
 
-module lab2
+module enc
 	( input logic clk,
 	  output logic up, enable,
 	  input logic enc1a, enc1b ) ;

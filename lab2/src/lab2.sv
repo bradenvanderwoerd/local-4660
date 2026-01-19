@@ -25,7 +25,7 @@ module lab2
 	enc e0(clk, up, enable, enc1a, enc1b) ;
 			
 	always_ff @(posedge clk) counter
-		<= ~s1 : 0 ;
+		<= ~s1 ? 0 :
            ~enable ? counter :
 			up ? counter + 1 :
 			counter - 1 ;
