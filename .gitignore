@@ -1,3 +1,7 @@
 # .gitignore
-# Ignore compilation reports
-*/build/compilation_report.txt
+
+# Ignore built files
+*/build/
+
+# Ignore object directories
+*/obj_dir/
