@@ -70,6 +70,30 @@ EOF
 echo "Generating Quartus settings file..."
 sed "s/PROJECT_NAME_PLACEHOLDER/$PROJECT_NAME/g" "$TOOLS_DIR/project.qsf.template" > "$PROJECT_NAME/$PROJECT_NAME.qsf"
 
+# Generate a minimal SystemVerilog source file
+echo "Generating SystemVerilog source file..."
+cat > "$PROJECT_NAME/src/$PROJECT_NAME.sv" << EOF
+// $PROJECT_NAME.sv
+// Description: Top-level module for the $PROJECT_NAME FPGA project
+// Braden Vanderwoerd, $(date +%Y/%m/%d)
+
+module $PROJECT_NAME ;
+
+endmodule
+EOF
+
+# Generate a minimal testbench file
+echo "Generating simulation testbench file..."
+cat > "$PROJECT_NAME/sim/${PROJECT_NAME}_tb.sv" << EOF
+// ${PROJECT_NAME}_tb.sv
+// Description: Testbench for the $PROJECT_NAME module
+// Braden Vanderwoerd, $(date +%Y/%m/%d)
+
+module ${PROJECT_NAME}_tb;
+
+endmodule
+EOF
+
 echo -e "${GREEN}✅ Project '$PROJECT_NAME' created successfully!${NC}"
 echo ""
 echo "Project structure:"
