@@ -29,7 +29,7 @@ module lab2
 	bcdcnt b3(clk, carry2, borrow2, reset, counter[15:12], carry3, borrow3) ;
 
     // 4-digit 7-segment display driver
-    fourdigit f0(clk131k, counter, ct, leds) ;
+    fourdigit f0(clk, counter, ct, leds) ;
 
     // Binary counter and tone generator
     logic [13:0] frequency ;
