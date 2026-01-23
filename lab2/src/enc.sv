@@ -1,5 +1,5 @@
 // enc.sv
-// Description: Rotary enocder state machine
+// Rotary encoder state machine
 // Braden Vanderwoerd, 1/18/2026
 
 module enc

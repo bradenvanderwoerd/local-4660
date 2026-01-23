@@ -1,5 +1,5 @@
 // bcnt.sv
-// Description: 14 bit binary counter
+// 14 bit binary counter
 // Braden Vanderwoerd, 1/18/2026
 
 module bcnt

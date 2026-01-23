@@ -1,5 +1,5 @@
 // bcdcnt.sv
-// Description: BCD Counter Module
+// BCD counter module
 // Braden Vanderwoerd, 1/18/2026
 
 module bcdcnt

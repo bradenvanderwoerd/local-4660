@@ -1,5 +1,5 @@
 // fourdigit.sv
-// Description: Four Digit 7-Segment Display Driver
+// Four digit 7-segment display driver
 // Braden Vanderwoerd, 1/18/2026
 
 module fourdigit
@@ -8,7 +8,6 @@ module fourdigit
       output logic [3:0] ct,
       output logic [7:0] seg ) ;
 
-	// 7-segment decoder values for hexadecimal digits 0-F
 	logic [7:0] decoder7 [0:15] ;
 	assign decoder7 = '{ 63, 6, 91, 79, 102, 109, 125, 7, 127, 111, 119, 124, 57, 94, 121, 113} ;
 

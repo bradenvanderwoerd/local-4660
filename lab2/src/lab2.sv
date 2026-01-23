@@ -1,5 +1,5 @@
 // lab2.sv
-// Description:
+// Tone generator with rotary encoder and 4-digit 7-segment display
 // Braden Vanderwoerd, 1/18/2026
 
 module lab2

@@ -1,3 +1,7 @@
+// clkdiv.sv
+// Parameterized clock divider module
+// From ELEX 2117 course materials
+
 module clkdiv
   #( fin = 50_000_000, fout = 1000 )
    ( input logic clkin, 
