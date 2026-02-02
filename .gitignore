@@ -5,3 +5,6 @@
 
 # Ignore object directories
 */obj_dir/
+
+# Ignore RISC V license files
+/tools/LR-281343_License.dat

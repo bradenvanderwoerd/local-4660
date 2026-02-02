@@ -172,7 +172,7 @@
   <parameter name="numGpr" value="32" />
   <parameter name="pipelineArch" value="true" />
   <parameter name="resetOffset" value="0" />
-  <parameter name="resetSlave" value="Absolute" />
+  <parameter name="resetSlave" value="onchip_memory2_0.s1" />
   <parameter name="useResetReq" value="false" />
  </module>
  <module
