@@ -6,6 +6,7 @@
 # --- 1. Settings & Configuration ---
 
 # Azure Configuration
+PROJECT_NAME   = lab5
 RESOURCE_GROUP = fpga-quartus-rg
 VM_NAME        = quartus-linux
 VM_DIR         = ~/fpga_projects/$(PROJECT_NAME)
@@ -167,7 +168,7 @@ bake: app
 	@echo "$(BLUE)👨‍🍳 Baking software into bitstream...$(NC)"
 	# 1. Copy HEX
 	ssh azure-vm "$(LICENSE_EXPORT) && cd $(VM_DIR) && \
-		cp software/app/build/onchip_memory2_0.hex $(MEM_INIT_FILE)"
+		cp software/app/build/mem.hex $(MEM_INIT_FILE)"
 	# 2. Update SOF
 	ssh azure-vm "$(LICENSE_EXPORT) && cd $(VM_DIR) && \
 		$(QUARTUS_BIN)/quartus_cdb --update_mif $(PROJECT_NAME) && \

@@ -5,6 +5,8 @@
 #   Creates a new FPGA project based on the de10_blink template
 # ==========================================
 
+# Must be updated for QSYS projects
+
 set -e  # Exit on error
 
 # Colors for output
