@@ -17,6 +17,7 @@ set_instance_parameter_value cpu {resetSlave} {mem.s1}
 add_instance mem altera_avalon_onchip_memory2
 set_instance_parameter_value mem {memorySize} {262144}
 set_instance_parameter_value mem {initializationFileName} {hello.hex}
+set_instance_parameter_value mem {useNonDefaultInitFile} {true}
 
 add_instance jtag_uart_0 altera_avalon_jtag_uart
 

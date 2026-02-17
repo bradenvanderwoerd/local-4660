@@ -76,3 +76,9 @@ void SPI_TransmitData(uint16_t len, uint8_t *data) {
    SPI_send(len,data) ;
 }
 
+// Safely write a 5-bit pattern to LED[4:0] without crushing the LCD control pins
+void set_debug_leds(uint8_t pattern) {
+    // Keep the bottom 3 bits (LCD control), and map the pattern to bits 3-7
+    pio = (pio & 0x07) | ((pattern & 0x1F) << 3);
+    IOWR(PIO_BASE, 0, pio);
+}

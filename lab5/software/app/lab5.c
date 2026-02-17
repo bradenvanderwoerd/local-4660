@@ -24,6 +24,8 @@ juart-terminal
 #include "fonts.h"
 #include "gfx.h"
 
+extern void set_debug_leds(uint8_t pattern);
+
 int main ( void ) {
 
 	// uint8_t f = 0;
@@ -31,12 +33,19 @@ int main ( void ) {
     uint16_t lastx=0, lasty=0 ;
     char buf [80];
 
+    set_debug_leds(0x01);
+
    // configure the first and last ADC channels to sample
    int firstch=0, lastch=1 ;
    IOWR_32DIRECT(LTC2308_BASE, 0, ((lastch&7)<<3) | (firstch&7) );
 
+    set_debug_leds(0x02);
+
    // set up controller, including Booster Pack orientation
    ST7735S_Init();
+
+    set_debug_leds(0x04);
+
    setOrientation(R90);
 
    printf("ST7735S initialized.\n") ;
@@ -46,9 +55,13 @@ int main ( void ) {
 	fillScreen();
     setbgColor(0,0,0);
 	setFont(ter_u12b);
+    
+    int state = 0x08 ;
 
-    //while (1) {
-    for ( int i=0 ; 1 ; i++ ) {
+    while (1) {
+
+        state ^= 0x18; // toggle bits 3 and 4 to indicate we're in the main loop
+        set_debug_leds(state); // toggle bit 3 to indicate we're in the main loop
 
     	// read joystick x and y
         for ( int n=0 ; n != 3 ; ) {
@@ -88,7 +101,11 @@ int main ( void ) {
 
         drawText(0,0, "Braden Vanderwoerd\n");
 
+    }
+    /*
+
+    for (int i = 0; 1; i++) {
         IOWR_32DIRECT(PIO_BASE,0,1<<(i%8)) ;
         usleep(100000) ;
-    }
+    }*/
 }

@@ -150,7 +150,7 @@
    version="24.1"
    enabled="1">
   <parameter name="allowInSystemMemoryContentEditor" value="false" />
-  <parameter name="autoInitializationFileName">lab5_mem</parameter>
+  <parameter name="autoInitializationFileName" value="lab5_mem" />
   <parameter name="blockType" value="AUTO" />
   <parameter name="copyInitFile" value="false" />
   <parameter name="dataWidth" value="32" />

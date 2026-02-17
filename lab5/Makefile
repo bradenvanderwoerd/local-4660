@@ -99,7 +99,12 @@ update-qsf:
 qsys: sync
 	@echo "$(BLUE)⚙️  Generating QSYS IP files...$(NC)"
 	ssh azure-vm "$(LICENSE_EXPORT) && cd $(VM_DIR) && \
+		~/intelFPGA_lite/24.1/quartus/sopc_builder/bin/qsys-script --script=$(PROJECT_NAME).tcl --system_export-dir=qsys_output" 2>&1 | tee build/qsys_report.txt
+
+	ssh azure-vm "$(LICENSE_EXPORT) && cd $(VM_DIR) && \
 		~/intelFPGA_lite/24.1/quartus/sopc_builder/bin/qsys-generate $(PROJECT_NAME).qsys --synthesis=VERILOG"
+
+	scp azure-vm:$(VM_DIR)/$(PROJECT_NAME).qsys ./$(PROJECT_NAME).qsys
 	scp azure-vm:$(VM_DIR)/$(PROJECT_NAME)/synthesis/$(PROJECT_NAME).qip build/
 	@echo "$(GREEN)✅ QSYS generation complete.$(NC)"
 
