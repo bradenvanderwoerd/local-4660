@@ -125,11 +125,20 @@ static uint8_t init_cmd[] = {
 
 void initCommands(void) {
     uint8_t args;
-
+    uint8_t cmd;
+    
     for(uint16_t i = 0; i < sizeof(init_cmd); i+=args+1) {
         args = init_cmd[i];
-
+        cmd = init_cmd[i+1]; // Grab the actual command byte
+        
         SPI_Transmit(args, &init_cmd[i+1]);
+        
+        // Enforce the mandatory datasheet delays for strict LCD batches
+        if (cmd == 0x01) {      // SWRESET
+            Delay(150);
+        } else if (cmd == 0x11) { // SLPOUT
+            Delay(150);
+        }
     }
 }
 
