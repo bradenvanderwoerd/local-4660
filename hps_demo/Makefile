@@ -43,7 +43,7 @@ TB_MODULE      = $(shell grep -h "^module" $(TBS) 2>/dev/null | sed 's/module[[:
 # HPS Settings
 HPS_DIR		   = ./software/hps
 HPS_TARGET	   = $(PROJECT_NAME)
-SOCEDS_DEST_ROOT = /home/azure-vm/intelFPGA/20.1/embedded
+SOCEDS_ROOT = ~/intelFPGA/20.1/embedded
 HPS_IPS		   = 192.168.1.100
 
 # --- 2. Color Codes ---
@@ -222,7 +222,7 @@ surfer:
 # ==========================================
 build-hps: sync
 	@echo "$(BLUE)🔨 Building HPS software...$(NC)"
-	ssh azure-vm "cd $(VM_DIR)/$(HPS_DIR) && make"
+	ssh azure-vm "cd $(VM_DIR)/$(HPS_DIR) && $(SOCEDS_ROOT)/embedded_command_shell.sh make"
 	@echo "$(BLUE)⬇️  Downloading HPS binary...$(NC)"
 	mkdir -p build
 	scp azure-vm:$(VM_DIR)/$(HPS_DIR)/$(HPS_TARGET) ./build/$(HPS_TARGET)
