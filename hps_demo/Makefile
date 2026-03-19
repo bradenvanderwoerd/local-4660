@@ -115,7 +115,7 @@ qsys: sync
 	@echo "$(GREEN)✅ QSYS generation complete.$(NC)"
 
 # Full Hardware Build (Compile .sof -> Convert to .rbf)
-build: check-qsys-build qsys-if-needed
+build: check-qsys-build qsys-if-needed sync
 	@echo "$(BLUE)🔨 Triggering Cloud Build (Quartus 24.1)...$(NC)"
 	@mkdir -p build
 	@echo "$(CYAN)📝 Log: build/compilation_report.txt$(NC)"

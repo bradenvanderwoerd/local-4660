@@ -17,7 +17,7 @@ module lab5_top
     .pio_export ({LED[4:0],lcd_cs,lcd_rs,lcd_rst}), // pio.export
     .spi_MISO (1'b0), // spi.MISO
     .spi_MOSI (lcd_sda), // .MOSI
-    .spi_SCLK (lcd_scl), // .SCLK
+    .spi_SCLK (lcd_scl),a // .SCLK
     .spi_SS_n (LED[6]), // .SS_n
     .clk50_clk (clk50), // clk50.clk
     .reset_reset_n (s1) // reset.reset_n
